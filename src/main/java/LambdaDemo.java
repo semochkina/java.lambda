@@ -11,16 +11,16 @@ interface QuadroPredicate<T1, T2, T3, T4> {
 
 public class LambdaDemo {
 
-    // 1) для строки символов получить ее длину
+    // для строки символов получить ее длину
     public static final Function<String, Integer> getLength = String::length;
 
-    // 2) для строки символов получить ее первый символ, если он существует, или null иначе
+    // для строки символов получить ее первый символ, если он существует, или null иначе
     public static final Function<String, Character> getFirstChar = s -> (s == null || s.length() == 0) ? null : s.charAt(0);
 
-    // 3) для строки проверить, что она не содержит пробелов
+    // для строки проверить, что она не содержит пробелов
     public static final Predicate<String> checkNoSpaces = s -> s.indexOf(' ') < 0;
 
-    // 4) слова в строке разделены запятыми, по строке получить количество слов в ней
+    // слова в строке разделены запятыми, по строке получить количество слов в ней
     public static final Function<String, Integer> getWordCount = s -> {
         int count = 0;
         for (int i = 0; i < s.length(); i++)
@@ -29,24 +29,23 @@ public class LambdaDemo {
         return count + 1;
     };
 
-    // 5) по человеку получить его возраст
+    // по человеку получить его возраст
     public static final Function<Human, Integer> getAge = Human::getAge;
 
-    // 6) по двум людям проверить, что у них одинаковая фамилия
+    // по двум людям проверить, что у них одинаковая фамилия
     public static final BiPredicate<Human, Human> checkSameSurname = (h1, h2) ->
             h1.getSurname().equals(h2.getSurname());
 
-    // 7) получить фамилию, имя и отчество человека в виде одной строки (разделитель — пробел)
+    // получить фамилию, имя и отчество человека в виде одной строки (разделитель — пробел)
     public static final Function<Human, String> getFullName = h -> h.getSurname().concat(" ")
             .concat(h.getName()).concat(" ")
             .concat(h.getPatronymic());
 
-    // 8) сделать человека старше на один год (по объекту human.Human создать новый объект)
+    // сделать человека старше на один год (по объекту human.Human создать новый объект)
     public static final Function<Human, Human> incrementAge = h -> new Human(h.getName(), h.getSurname(),
             h.getPatronymic(), h.getAge() + 1, h.getGender());
 
-    // 9) по трем людям и заданному возрасту maxAge проверить, что все три человека моложе
-    //maxAge
+    // по трем людям и заданному возрасту maxAge проверить, что все три человека моложе maxAge
     public static final QuadroPredicate<Human, Human, Human, Integer> checkAllYounger = (h1, h2, h3, a) ->(h1 != null) && h1.getAge() < a
             && h2.getAge() < a
             && h3.getAge() < a;

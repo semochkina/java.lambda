@@ -1,7 +1,5 @@
 package human;
 
-import human.Human;
-
 public class Student extends Human {
 
     private String university;
